@@ -1,0 +1,105 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.background {
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+h1 {
+	font-weight: bolder;
+	margin-bottom: 10px;
+}
+
+#container {
+	text-align: center;
+	min-width: 400px;
+	max-width: 90%;
+	height: 305px;
+	border-radius: 15px;
+	padding: 15px;
+}
+
+#newItem {
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 10px 200px;
+}
+
+#newItem:focus {
+	outline: 0;
+}
+
+.button {
+	border-radius: 10px;
+	border-style: none;
+	cursor: pointer;
+}
+
+#add {
+	width: 40px;
+	height: 40px;
+	padding: 5px;
+	font-weight: bold;
+	background-color: #1E80F1;
+	color: #f5f6f7;
+}
+
+#tasks-list {
+	list-style: none;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
+#tasks-list li {
+	text-align: left;
+	margin-left: 50px;
+	font-size: 20px;
+}
+
+.checkmark {
+	position: relative;
+	cursor: pointer;
+}
+
+.checkmark:before,
+.checkmark:checked:before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: -4px;
+	left: -5px;
+	border-radius: 5px;
+}
+
+.checkmark:before {
+	background-color: #f5f6f7;
+}
+
+.checkmark:checked:before {
+	background-color: #1E80F1;
+}
+
+.checkmark:checked:after {
+	content: "";
+	display: block;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	top: -2px;
+	left: 2px;
+}

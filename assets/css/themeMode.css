@@ -1,0 +1,17 @@
+.background-light {
+    background: #f5f6f7;
+}
+
+.background-dark {
+    background: #18191a;
+}
+
+.container-light {
+    background: #18191a;
+    color: #f5f6f7;
+}
+
+.container-dark {
+    background: #dbdbdb;
+    color: #18191a;
+}

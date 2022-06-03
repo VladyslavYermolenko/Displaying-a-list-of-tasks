@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/popUp.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/themeMode.css">
+</head>
+
+<body class="background background-dark">
+    <nav>
+        <ul class="menu-main">
+            <!-- <li class="left"><a href="/index.html">MAIN</a></li> -->
+            <li class="left"><img src="./assets/images/logo.png" style="display: block;margin: 15px -5px 15px 15px;width: 50px;"></img></li>
+            <li class="left"><p>TODO LIST</p></li>
+            <li class="center"><a id="button-add-new-task" href="/#">ADD NEW TASK</a></li>
+            <li class="right"><i id="themeMode" class="fa-solid fa-sun" onclick="mode()"></i></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="container" class="container-dark">
+            <h1>Todo List</h1>
+
+            <ul id="tasks-list">
+                <li>
+
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <div id="pop-up">
+        <div class="container">
+            <div class="item">
+                <h2>Тест</h2>
+                <form action="">
+                    <input type="text", placeholder="Task name...">
+                    <input type="text", placeholder="Description...">
+                    <button>ADD NEW TASK</button>
+                </form>
+                <span class="close">&#10006</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/popUp.js"></script>
+<script src="https://kit.fontawesome.com/7702e07f88.js" crossorigin="anonymous"></script>
+
+</html>
