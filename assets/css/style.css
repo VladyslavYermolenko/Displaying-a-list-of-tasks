@@ -18,11 +18,11 @@ h1 {
 
 #container {
 	text-align: center;
-	min-width: 400px;
-	max-width: 90%;
-	height: 305px;
+	width: 600px;
+	height: 700px;
 	border-radius: 15px;
 	padding: 15px;
+	overflow-y: scroll;
 }
 
 #newItem {
@@ -41,65 +41,48 @@ h1 {
 	cursor: pointer;
 }
 
-#add {
-	width: 40px;
-	height: 40px;
-	padding: 5px;
-	font-weight: bold;
-	background-color: #1E80F1;
-	color: #f5f6f7;
-}
-
 #tasks-list {
 	list-style: none;
-	margin-bottom: 15px;
-	margin-top: 15px;
 	max-height: 200px;
-	overflow-y: scroll;
 }
 
 #tasks-list li {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px 50px 10px 50px;
 	text-align: left;
-	margin-left: 50px;
 	font-size: 20px;
+	border: 1px solid black;
+	border-radius: 10px;
 }
 
-.checkmark {
-	position: relative;
-	cursor: pointer;
+#tasks-list li span {
+	display: inline-block;
 }
 
-.checkmark:before,
-.checkmark:checked:before {
-	content: "";
+#tasks-list li span input,
+#tasks-list li span h3 {
+	float: left;
+	max-width: 90%;
+	text-decoration: none;
+}
+
+#tasks-list li span input {
 	display: block;
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: -4px;
-	left: -5px;
-	border-radius: 5px;
+	padding: 10px;
+	margin: 0 5px 0px 0;
+	width: 30px;
+	height: 30px;
 }
-
-.checkmark:before {
-	background-color: #f5f6f7;
-}
-
-.checkmark:checked:before {
-	background-color: #1E80F1;
-}
-
-.checkmark:checked:after {
-	content: "";
+#tasks-list li .due-date {
 	display: block;
-	width: 5px;
-	height: 10px;
-	border: solid white;
-	border-width: 0 2px 2px 0;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
-	position: absolute;
-	top: -2px;
-	left: 2px;
+	margin: 5px 0 5px 0;
+}
+
+#tasks-list li .description  {
+	display: block;
+	max-width: 90%;
+	font-size: 18px;
+	text-decoration: none;
+	font-size: 16px;
 }

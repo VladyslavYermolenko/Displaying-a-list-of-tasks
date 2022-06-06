@@ -26,10 +26,6 @@
 	background-color: #ffffff;
 }
 
-/* #pop-up .item h2 {
-    
-} */
-
 #pop-up .item input {
 	display: block;
 	margin: 25px auto 0px auto;
@@ -43,9 +39,22 @@
 	color: #89909f;
 }
 
+#pop-up .item button {
+	margin: 25px auto 0px auto;
+	padding: 17px 20px;
+}
+
 #pop-up .item input:focus {
 	outline: none;
 }
+
+#pop-up .item .close {
+	top: 0;
+	right: 10px;
+	position: absolute;
+	font-size: 40px;
+}
+
 
 #pop-up .close:hover,
 #pop-up .close:focus {

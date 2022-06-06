@@ -29,7 +29,7 @@ nav .menu-main .right {
 	float: right;
 }
 
-nav .menu-main a, p {
+nav .menu-main a, nav .menu-main p {
 	display: block;
 	line-height: 80px;
 	padding: 0 20px;
@@ -45,22 +45,20 @@ nav .menu-main img {
 	margin: 15px -5px 15px 15px;
 	width: 50px;
 }
-nav .menu-main #themeMode {
-	display: block;
-	cursor: pointer;
-	font-size: 35px;
-	line-height: 80px;
-	padding: 0 20px;
-	letter-spacing: 2px;
-	color: white;
-}
 
-nav .menu-main a:hover, #themeMode:hover {
+nav .menu-main a:hover {
 	background: rgba(0, 0, 0, .5);
 	transition: background 1s;
 }
 
-nav .menu-main a:not(:hover), #themeMode:not(:hover) {
+nav .menu-main a:not(:hover) {
 	background: rgba(0, 0, 0, .0);
 	transition: background 1s;
+}
+
+nav .menu-main input {
+	display: block;
+	margin: 15px 15px 15px -5px;
+	width: 50px;
+	height: 50px;
 }
