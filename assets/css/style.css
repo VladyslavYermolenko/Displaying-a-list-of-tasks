@@ -17,12 +17,13 @@ h1 {
 }
 
 #container {
+	display: inline-block;
+	margin-bottom: 20px;
 	text-align: center;
 	width: 600px;
-	height: 700px;
+	height: 102.5%;
 	border-radius: 15px;
 	padding: 15px;
-	overflow-y: scroll;
 }
 
 #newItem {
@@ -76,6 +77,7 @@ h1 {
 }
 #tasks-list li .due-date {
 	display: block;
+	font-weight: 600;
 	margin: 5px 0 5px 0;
 }
 
@@ -83,6 +85,16 @@ h1 {
 	display: block;
 	max-width: 90%;
 	font-size: 18px;
-	text-decoration: none;
 	font-size: 16px;
+	text-decoration: none;
+	color: #052938;
+}
+
+#tasks-list li .isDone {
+	color: grey;
+	text-decoration: line-through;
+}
+
+#tasks-list li .overdueDate {
+	color: red;
 }

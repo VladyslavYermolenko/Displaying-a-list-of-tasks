@@ -49,47 +49,62 @@ function checkedOrNot(isDone) {
   return "";
 }
 
+function checkboxIsChecked(element) {
+  document
+    .getElementById(`task-${element.id}`)
+    .classList.toggle("isDone", element.checked);
+}
+
+function addToHTML(tasks_list, id, name, description, done, dueDate) {
+  let temp = "";
+  temp += `<li><span><input type="checkbox" id="${+id}" onclick="checkboxIsChecked(this)"  class="checkbox_tasks-list" ${checkedOrNot(done)} /><h3 `;
+  if (done) temp += `class="isDone" `;
+  temp += `id="task-${id}">${name}</h3></span>`;
+  if (dueDate) {
+    temp += `<p class="due-date`;
+    if (new Date(dueDate).getTime() <= new Date().getTime()) temp += ` overdueDate`;
+    temp += `">Due Date: ${new Date(dueDate).toLocaleDateString()}</p>`;
+  }
+  if (description) {
+    temp += `<p class="description">${description}</p>`;
+  }
+  temp += `</li>`;
+  tasks_list.innerHTML += temp;
+}
+
 function addNewTask() {
   const tasks_list = document.getElementById("tasks-list");
-  const textBox_name = document.getElementById('pop-up_name');
-  const textBox_description = document.getElementById('pop-up_description');
-  const date_dueDate = document.getElementById('pop-up_due-date');
-  
-  if (date_dueDate.value) {
-    tasks_list.innerHTML += `<li>
-  <span>
-      <input type="checkbox" />
-      <h3>${textBox_name.value}</h3>
-  </span>
-  <p class="due-date">Due Date: ${new Date(date_dueDate.value).toLocaleDateString()}</p>
-  <p class="description">${textBox_description.value}</p>
-</li>
-`;
-  } else {
-    tasks_list.innerHTML += `<li>
-  <span>
-      <input type="checkbox" />
-      <h3>${textBox_name.value}</h3>
-  </span>
-  <p class="description">${textBox_description.value}</p>
-</li>
-`;
-  }
+  const id = primaryKey();
+  const textBox_name = document.getElementById("pop-up_name");
+  const textBox_description = document.getElementById("pop-up_description");
+  const date_dueDate = document.getElementById("pop-up_due-date");
+
+  addToHTML(
+    tasks_list,
+    id,
+    textBox_name.value,
+    textBox_description.value,
+    false,
+    date_dueDate.value
+  );
+
   tasks.push({
-    id: primaryKey,
+    id: id,
     name: textBox_name.value,
     description: textBox_description.value,
     done: false,
-    due_date: date_dueDate.value
+    due_date: date_dueDate.value,
   });
 }
 
-const button_addNewTask = document.getElementById('pop-up_add-new-task');
-button_addNewTask.addEventListener('click', function clickNewTaskButton(event) {
+const button_addNewTask = document.getElementById("pop-up_add-new-task");
+button_addNewTask.addEventListener("click", function clickNewTaskButton(event) {
   event.preventDefault();
-  const textBox_name = document.getElementById('pop-up_name');
-  
+  const textBox_name = document.getElementById("pop-up_name");
+
   if (textBox_name.value) {
+    const popUp = document.getElementById("pop-up");
+    popUp.style.display = "none";
     addNewTask();
   }
 });
@@ -98,28 +113,9 @@ function addDefaultTasks() {
   const tasks_list = document.getElementById("tasks-list");
   function addTaskInContainer(object) {
     const { id, name, description, done, due_date } = object;
-    if (due_date) {
-      tasks_list.innerHTML += `<li>
-    <span>
-        <input type="checkbox" ${checkedOrNot(done)} />
-        <h3>${name}</h3>
-    </span>
-    <p class="due-date">Due Date: ${new Date(due_date).toLocaleDateString()}</p>
-    <p class="description">${description}</p>
-  </li>
-  `;
-    } else {
-      tasks_list.innerHTML += `<li>
-    <span>
-        <input type="checkbox" ${checkedOrNot(done)} />
-        <h3>${name}</h3>
-    </span>
-    <p class="description">${description}</p>
-  </li>
-  `;
-    }
-  }
 
+    addToHTML(tasks_list, id, name, description, done, due_date);
+  }
   tasks.forEach(addTaskInContainer);
 }
 

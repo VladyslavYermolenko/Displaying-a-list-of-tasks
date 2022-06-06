@@ -6,26 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/themeMode.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/popUp.css">
-    <link rel="stylesheet" href="assets/css/navigation.css">
-    <link rel="stylesheet" href="assets/css/themeMode.css">
 </head>
 
 <body class="background background-dark">
     <nav>
         <ul class="menu-main">
-            <li class="left"><img src="./assets/images/logo.png" style="display: block;margin: 15px -5px 15px 15px;width: 50px;"></img></li>
-            <li class="left"><p>TODO LIST</p></li>
+            <li class="left"><img src="./assets/images/logo.png"
+                    style="display: block;margin: 15px -5px 15px 15px;width: 50px;"></img></li>
+            <li class="left">
+                <p>TODO LIST</p>
+            </li>
             <li class="center"><a id="button-add-new-task" href="#">ADD NEW TASK</a></li>
-            <li class="right"><input type="checkbox" /></li>
-            <li class="right"><p>ALL TASKS</p></li>
+            <li class="right"><input type="checkbox" class="checkbox_all-tasks" checked /></li>
+            <li class="right">
+                <p>ALL TASKS</p>
+            </li>
         </ul>
     </nav>
     <main>
         <div id="container" class="container-dark">
             <h1>Todo List</h1>
-            <ul id="tasks-list"></ul>
+            <ul id="tasks-list">
+                <li>
+                    <span>
+                        <input type="checkbox" id="0" onclick="checkboxIsChecked(this)" class="checkbox_tasks-list" />
+                        <h3 id="task-0" class="isDone">Test Task</h3>
+                    </span>
+                    <p class="due-date overdueDate">Due Date: 01.06.2022</p>
+                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt fugit, quis
+                        voluptates minima exercitationem iusto aliquid sapiente! Neque ut quo labore at ex facilis
+                        aliquid doloribus voluptatibus. Delectus, voluptatibus amet.</p>
+
+                </li>
+            </ul>
         </div>
     </main>
 
@@ -35,9 +52,9 @@
                 <span class="close">&#10006</span>
                 <h2>Add new task:</h2>
                 <form action="">
-                    <input type="text", id="pop-up_name" placeholder="Task name..." />
-                    <input type="text", id="pop-up_description" placeholder="Description..." />
-                    <input type="date" id="pop-up_due-date" />                    
+                    <input type="text" id="pop-up_name" placeholder="Task name..." />
+                    <input type="text" id="pop-up_description" placeholder="Description..." />
+                    <input type="date" id="pop-up_due-date" />
                     <button id="pop-up_add-new-task">ADD NEW TASK</button>
                 </form>
             </div>
