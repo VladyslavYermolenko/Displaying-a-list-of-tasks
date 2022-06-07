@@ -100,13 +100,6 @@ function addNewTask() {
     date_dueDate.value
   );
 
-  tasks.push({
-    id: id,
-    name: textBox_name.value,
-    description: textBox_description.value,
-    done: false,
-    due_date: date_dueDate.value,
-  });
   textBox_name.value = "";
   textBox_description.value = "";
   date_dueDate.value = "";
