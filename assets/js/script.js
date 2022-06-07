@@ -12,7 +12,7 @@ const tasks = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt fugit, quis voluptates minima exercitationem iusto aliquid sapiente! Neque ut quo labore at ex facilis aliquid doloribus voluptatibus. Delectus, voluptatibus amet.",
     done: true,
-    due_date: new Date("2022-06-01"),
+    due_date: new Date("2023-06-01"),
   },
   {
     id: 3,
@@ -49,10 +49,16 @@ function checkedOrNot(isDone) {
   return "";
 }
 
-function checkboxIsChecked(element) {
+function checkboxAllTasks(element) {
   document
-    .getElementById(`task-${element.id}`)
-    .classList.toggle("isDone", element.checked);
+    .getElementById(`tasks-list`)
+    .classList.toggle("hide-completed-tasks", !element.checked);
+}
+
+function checkboxIsChecked(element) {
+  const task = document.getElementById(`task-${element.id}`);
+  task.classList.toggle("isDone", element.checked);
+  task.closest("li").classList.toggle("done", element.checked);
 }
 
 function addToHTML(tasks_list, id, name, description, done, dueDate) {
@@ -101,6 +107,9 @@ function addNewTask() {
     done: false,
     due_date: date_dueDate.value,
   });
+  textBox_name.value = "";
+  textBox_description.value = "";
+  date_dueDate.value = "";
 }
 
 const button_addNewTask = document.getElementById("pop-up_add-new-task");
