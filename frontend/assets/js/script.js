@@ -1,43 +1,4 @@
-const tasks = [
-  {
-    id: 1,
-    name: "Task 1",
-    description: "Description",
-    done: false,
-    due_date: "",
-  },
-  {
-    id: 2,
-    name: "Task 2",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt fugit, quis voluptates minima exercitationem iusto aliquid sapiente! Neque ut quo labore at ex facilis aliquid doloribus voluptatibus. Delectus, voluptatibus amet.",
-    done: true,
-    due_date: new Date("2023-06-01"),
-  },
-  {
-    id: 3,
-    name: "Task 3",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt fugit, quis voluptates minima exercitationem iusto aliquid sapiente! Neque ut quo labore at ex facilis aliquid doloribus voluptatibus. Delectus, voluptatibus amet.",
-    done: false,
-    due_date: new Date("2022-01-15"),
-  },
-  {
-    id: 4,
-    name: "Task 4",
-    description: "",
-    done: true,
-    due_date: new Date("2022-09-21"),
-  },
-  {
-    id: 5,
-    name: "Task Task Task Task Task Task Task Task Task 5",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt fugit, quis voluptates minima exercitationem iusto aliquid sapiente! Neque ut quo labore at ex facilis aliquid doloribus voluptatibus. Delectus, voluptatibus amet.",
-    done: false,
-    due_date: new Date("2021-11-05"),
-  },
-];
+
 
 const increment = (init = tasks.reduce((prev, cur) => prev['id'] > cur['id'] ? prev : cur['id'])) => () => ++init;
 const primaryKey = increment();
