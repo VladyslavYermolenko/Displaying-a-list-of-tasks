@@ -57,7 +57,13 @@ function checkboxIsChecked(element) {
 
 function addToHTML(tasks_list, id, name, description, done, dueDate) {
   let temp = "";
-  temp += `<li><span><input type="checkbox" id="${+id}" onclick="checkboxIsChecked(this)"  class="checkbox_tasks-list" ${checkedOrNot(done)} /><h3 `;
+  temp += `<li`;
+  if (done) temp += ` class="done"`;
+  temp +=`>
+  <button class="button_deleteTask" onclick="deleteTask(this)">
+    &#10006</button>
+  <span>
+  <input type="checkbox" id="${id}" onclick="checkboxIsChecked(this)"  class="checkbox_tasks-list" ${checkedOrNot(done)} /><h3 `;
   if (done) temp += `class="isDone" `;
   temp += `id="task-${id}">${name}</h3></span>`;
   if (dueDate) {
@@ -117,6 +123,10 @@ function addDefaultTasks() {
     addToHTML(tasks_list, id, name, description, done, due_date);
   }
   tasks.forEach(addTaskInContainer);
+}
+
+function deleteTask(element) {
+  element.closest("li").remove();
 }
 
 addDefaultTasks();
