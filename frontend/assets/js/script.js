@@ -1,7 +1,10 @@
+const button_addNewTask = document.getElementById("pop-up_add-new-task");
+const url = 'http://localhost:3000/tasks'
 
-
-const increment = (init = tasks.reduce((prev, cur) => prev['id'] > cur['id'] ? prev : cur['id'])) => () => ++init;
-const primaryKey = increment();
+fetch(url)
+  .then(response => response.json())
+  .then(addDefaultTasks)
+  .catch(alert);
 
 function checkedOrNot(isDone) {
   if (isDone) {
@@ -22,7 +25,9 @@ function checkboxIsChecked(element) {
   task.closest("li").classList.toggle("done", element.checked);
 }
 
-function addToHTML(tasks_list, id, name, description, done, dueDate) {
+function addToHTML(object) {
+  const tasks_list = document.getElementById("tasks-list");
+  const {id, taskname, taskdescription, done, due_date} = object;
   let temp = "";
   temp += `<li`;
   if (done) temp += ` class="done"`;
@@ -32,48 +37,40 @@ function addToHTML(tasks_list, id, name, description, done, dueDate) {
   <span>
   <input type="checkbox" id="${id}" onclick="checkboxIsChecked(this)"  class="checkbox_tasks-list" ${checkedOrNot(done)} /><h3 `;
   if (done) temp += `class="isDone" `;
-  temp += `id="task-${id}">${name}</h3></span>`;
-  if (dueDate) {
+  temp += `id="task-${id}">${taskname}</h3></span>`;
+  if (due_date) {
     temp += `<p class="due-date`;
-    if (new Date(dueDate).getTime() <= new Date().getTime()) temp += ` overdueDate`;
-    temp += `">Due Date: ${new Date(dueDate).toLocaleDateString()}</p>`;
+    if (new Date(due_date).getTime() <= new Date().getTime()) temp += ` overdueDate`;
+    temp += `">Due Date: ${new Date(due_date).toLocaleDateString()}</p>`;
   }
-  if (description) {
-    temp += `<p class="description">${description}</p>`;
+  if (taskdescription) {
+    temp += `<p class="description">${taskdescription}</p>`;
   }
   temp += `</li>`;
   tasks_list.innerHTML += temp;
 }
 
 function addNewTask() {
-  const tasks_list = document.getElementById("tasks-list");
   const id = primaryKey();
-  const textBox_name = document.getElementById("pop-up_name");
-  const textBox_description = document.getElementById("pop-up_description");
-  const date_dueDate = document.getElementById("pop-up_due-date");
-
+  const object = { 
+    id: id,
+    taskname: document.getElementById("pop-up_name").value,
+    taskdescription: document.getElementById("pop-up_description").value,
+    done: false,
+    due_date: document.getElementById("pop-up_due-date").value
+  };
+  
   addToHTML(
-    tasks_list,
-    id,
-    textBox_name.value,
-    textBox_description.value,
-    false,
-    date_dueDate.value
+    object
   );
 
-  tasks.push({
-    id: id,
-    name: textBox_name.value,
-    description: textBox_description.value,
-    done: false,
-    due_date: date_dueDate.value,
-  });
+  
+
   textBox_name.value = "";
   textBox_description.value = "";
   date_dueDate.value = "";
 }
 
-const button_addNewTask = document.getElementById("pop-up_add-new-task");
 button_addNewTask.addEventListener("click", function clickNewTaskButton(event) {
   event.preventDefault();
   const textBox_name = document.getElementById("pop-up_name");
@@ -85,18 +82,10 @@ button_addNewTask.addEventListener("click", function clickNewTaskButton(event) {
   }
 });
 
-function addDefaultTasks() {
-  const tasks_list = document.getElementById("tasks-list");
-  function addTaskInContainer(object) {
-    const { id, name, description, done, due_date } = object;
-
-    addToHTML(tasks_list, id, name, description, done, due_date);
-  }
-  tasks.forEach(addTaskInContainer);
+function addDefaultTasks(todo) {
+  todo.forEach(addToHTML);
 }
 
 function deleteTask(element) {
   element.closest("li").remove();
 }
-
-addDefaultTasks();

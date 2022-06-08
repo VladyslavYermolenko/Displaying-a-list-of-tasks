@@ -1,13 +1,13 @@
 DROP TABLE tasksTable;
 CREATE TABLE tasksTable (
     id              SERIAL PRIMARY KEY, 
-    taskName        varchar not null,
-    taskDescription varchar not null,
+    taskname        varchar not null,
+    taskdescription varchar not null,
     done            boolean default false,
     due_date        date
 );
 
-INSERT INTO tasksTable (taskName, taskDescription, done, due_date) 
+INSERT INTO tasksTable (taskname, taskdescription, done, due_date) 
 VALUES (
     'Task 1', 
     'Description', 
