@@ -1,7 +1,8 @@
-const button_addNewTask = document.getElementById("pop-up_add-new-task");
-const url = 'http://localhost:3000/tasks'
 
-fetch(url)
+const button_addNewTask = document.getElementById("pop-up_add-new-task");
+const url = 'http://localhost:3000';
+
+const res = fetch(url + '/tasks')
   .then(response => response.json())
   .then(addDefaultTasks)
   .catch(alert);
@@ -50,25 +51,35 @@ function addToHTML(object) {
   tasks_list.innerHTML += temp;
 }
 
-function addNewTask() {
-  const id = primaryKey();
-  const object = { 
-    id: id,
-    taskname: document.getElementById("pop-up_name").value,
-    taskdescription: document.getElementById("pop-up_description").value,
-    done: false,
-    due_date: document.getElementById("pop-up_due-date").value
+async function addNewTask() {
+  // debugger;
+  const taskname = document.getElementById("pop-up_name");
+  const taskdescription = document.getElementById("pop-up_description");
+  const due_date = document.getElementById("pop-up_due-date") ;
+
+  const object = {
+    taskname: taskname.value,
+    taskdescription: taskdescription.value,
+    due_date: (due_date.value || null)
   };
-  
-  addToHTML(
-    object
-  );
 
-  
+  const response = await fetch(url + "/tasks", {
+    method: "POST",
+    body: JSON.stringify(object),
+    headers: { "Content-Type": "application/json" },
+  });
 
-  textBox_name.value = "";
-  textBox_description.value = "";
-  date_dueDate.value = "";
+  if (response) {
+    const json = await response.json();
+    addToHTML(json);
+  }
+  else {
+    alert('ERROR! Task not add to database.');
+  }
+
+  taskname.value = "";
+  taskdescription.value = "";
+  due_date.value = "";
 }
 
 button_addNewTask.addEventListener("click", function clickNewTaskButton(event) {

@@ -9,29 +9,7 @@ router.get('/', async (_, res) => {
             res.status(200).json(tasks);
         }
         else {
-            res.status(204).send('At the moment there are no tasks...');
-        }
-    }
-    catch (error) {
-        res.status(404).send('Not found!');
-        console.log(error);
-    }
-});
-
-router.get('/:id', async (req, res) => {
-    try {
-        const taskId = req.params['id'];
-        if (taskId) {
-            const task = await controller.getOneTask(taskId);
-            if (task) {
-                res.status(200).json(task);
-            }
-            else {
-                res.status(404).send('Task not found!');
-            }
-        }
-        else {
-            res.status(404).send('Incorrect ID task input!');
+            res.status(204).send();
         }
     }
     catch (error) {
@@ -42,9 +20,9 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { taskName, done } = req.body;
-        if (taskName) {
-            const newTask = await controller.createTask(taskName, done);
+        const { taskname, taskdescription, due_date } = req.body;
+        if (taskname) {
+            const newTask = await controller.createTask(taskname, taskdescription, due_date);
             if (newTask) {
                 res.status(201).json(newTask);
             }
@@ -76,30 +54,6 @@ router.delete('/:id', async (req, res) => {
     catch (error) {
         res.status(404).send('Not found!');
         console.log(error);
-    }
-});
-
-router.put('/:id', async (req, res) => {
-    const taskId = req.params['id'];
-    const {taskName, done} = req.body;
-    const newTask = await controller.putTask(taskId, taskName, done);
-    if (newTask) {
-        res.status(200).json(newTask);
-    }
-    else {
-        res.status(404).send('Failed to change item from database.');
-    }
-});
-
-router.patch('/:id', async (req, res) => {
-    const taskId = req.params['id'];
-    const {taskName, done} = req.body;
-    const newTask = await controller.patchTask(taskId, taskName, done);
-    if (newTask) {
-        res.status(200).json(newTask);
-    }
-    else {
-        res.status(404).send('Failed to change item from database.');
     }
 });
 
