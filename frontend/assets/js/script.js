@@ -2,8 +2,9 @@
 const button_addNewTask = document.getElementById("pop-up_add-new-task");
 const url = 'http://localhost:3000';
 
-const res = fetch(url + '/tasks')
+fetch(url + '/tasks')
   .then(response => response.json())
+  .then(response => response.sort((a, b) => a.id - b.id))
   .then(addDefaultTasks)
   .catch(alert);
 
@@ -20,8 +21,19 @@ function checkboxAllTasks(element) {
     .classList.toggle("hide-completed-tasks", !element.checked);
 }
 
-function checkboxIsChecked(element) {
-  const task = document.getElementById(`task-${element.id}`);
+async function checkboxIsChecked(element) {
+  const taskID = element['id'];
+  const task = document.getElementById(`task-${taskID}`);
+  await fetch(url + "/tasks/" + taskID, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      done: element.checked,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    }
+  });
+  
   task.classList.toggle("isDone", element.checked);
   task.closest("li").classList.toggle("done", element.checked);
 }
@@ -30,7 +42,7 @@ function addToHTML(object) {
   const tasks_list = document.getElementById("tasks-list");
   const {id, taskname, taskdescription, done, due_date} = object;
   let temp = "";
-  temp += `<li`;
+  temp += `<li id="${id}"`;
   if (done) temp += ` class="done"`;
   temp +=`>
   <button class="button_deleteTask" onclick="deleteTask(this)">
@@ -66,10 +78,10 @@ async function addNewTask() {
   const response = await fetch(url + "/tasks", {
     method: "POST",
     body: JSON.stringify(object),
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json; charset=UTF-8" },
   });
 
-  if (response) {
+  if (response.ok) {
     const json = await response.json();
     addToHTML(json);
   }
@@ -97,6 +109,11 @@ function addDefaultTasks(todo) {
   todo.forEach(addToHTML);
 }
 
-function deleteTask(element) {
+async function deleteTask(element) {
   element.closest("li").remove();
+
+  const taskID = element.closest("li")['id'];
+  await fetch(url + "/tasks/" + taskID, {
+    method: "DELETE"
+  });
 }

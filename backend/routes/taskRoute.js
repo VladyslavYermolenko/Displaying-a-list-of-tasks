@@ -57,4 +57,16 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.patch('/:id', async (req, res) => {
+    const taskId = req.params['id'];
+    const { done } = req.body;
+    const newTask = await controller.patchTask(taskId, done);
+    if (newTask) {
+        res.status(200).json(newTask);
+    }
+    else {
+        res.status(404).send('Failed to change item from database.');
+    }
+});
+
 module.exports = router;
