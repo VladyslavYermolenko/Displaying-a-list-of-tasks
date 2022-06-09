@@ -64,7 +64,6 @@ function addToHTML(object) {
 }
 
 async function addNewTask() {
-  // debugger;
   const taskname = document.getElementById("pop-up_name");
   const taskdescription = document.getElementById("pop-up_description");
   const due_date = document.getElementById("pop-up_due-date") ;
