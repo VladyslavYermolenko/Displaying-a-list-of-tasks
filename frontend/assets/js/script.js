@@ -84,14 +84,13 @@ async function addNewTask() {
   if (response.ok) {
     const json = await response.json();
     addToHTML(json);
+    taskname.value = "";
+    taskdescription.value = "";
+    due_date.value = "";
   }
   else {
     alert('ERROR! Task not add to database.');
   }
-
-  taskname.value = "";
-  taskdescription.value = "";
-  due_date.value = "";
 }
 
 button_addNewTask.addEventListener("click", function clickNewTaskButton(event) {
